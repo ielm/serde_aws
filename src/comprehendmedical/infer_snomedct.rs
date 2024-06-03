@@ -33,6 +33,24 @@ impl From<InferSnomedctOutput> for InferSnomedctOutput_ {
     }
 }
 
+// impl From<InferSnomedctOutput_> for InferSnomedctOutput {
+//     fn from(value: InferSnomedctOutput_) -> InferSnomedctOutput {
+//         let mut builder = InferSnomedctOutput::builder();
+//         builder.set_entities(
+//             value
+//                 .entities
+//                 .into_iter()
+//                 .map(|entity| entity.into())
+//                 .collect(),
+//         );
+//         builder.set_pagination_token(value.pagination_token);
+//         builder.set_model_version(value.model_version);
+//         builder.set_snomedct_details(value.snomedct_details.map(|details| details.into()));
+//         builder.set_characters(value.characters.map(|characters| characters.into()));
+//         builder.build().unwrap() // TODO: Handle error
+//     }
+// }
+
 #[derive(Serialize, Deserialize, Default)]
 pub struct SnomedctEntity_ {
     pub id: Option<i32>,
@@ -74,6 +92,36 @@ impl From<SnomedctEntity> for SnomedctEntity_ {
     }
 }
 
+// impl From<SnomedctEntity_> for SnomedctEntity {
+//     fn from(value: SnomedctEntity_) -> SnomedctEntity {
+//         let mut builder = SnomedctEntity::builder();
+//         builder.set_id(value.id);
+//         builder.set_text(value.text);
+//         builder.set_category(value.category.map(|category| category.into()));
+//         builder.set_type(value.type_.map(|type_| type_.into()));
+//         builder.set_score(value.score);
+//         builder.set_begin_offset(value.begin_offset);
+//         builder.set_end_offset(value.end_offset);
+//         builder.set_attributes(value.attributes.map(|attributes| {
+//             attributes
+//                 .into_iter()
+//                 .map(|attribute| attribute.into())
+//                 .collect()
+//         }));
+//         builder.set_traits(
+//             value
+//                 .traits
+//                 .map(|traits| traits.into_iter().map(|trait_| trait_.into()).collect()),
+//         );
+//         builder.set_snomedct_concepts(
+//             value
+//                 .snomedct_concepts
+//                 .map(|concepts| concepts.into_iter().map(|concept| concept.into()).collect()),
+//         );
+//         builder.build().unwrap() // TODO: Handle error
+//     }
+// }
+
 #[derive(Serialize, Deserialize)]
 pub enum SnomedctEntityCategory_ {
     Anatomy,
@@ -103,6 +151,19 @@ impl From<SnomedctEntityCategory> for SnomedctEntityCategory_ {
         }
     }
 }
+
+// impl From<SnomedctEntityCategory_> for SnomedctEntityCategory {
+//     fn from(value: SnomedctEntityCategory_) -> Self {
+//         match value {
+//             SnomedctEntityCategory_::Anatomy => SnomedctEntityCategory::Anatomy,
+//             SnomedctEntityCategory_::MedicalCondition => SnomedctEntityCategory::MedicalCondition,
+//             SnomedctEntityCategory_::TestTreatmentProcedure => {
+//                 SnomedctEntityCategory::TestTreatmentProcedure
+//             }
+//             SnomedctEntityCategory_::Unknown(unknown) => SnomedctEntityCategory::Unknown(unknown.0),
+//         }
+//     }
+// }
 
 #[derive(Serialize, Deserialize)]
 pub enum SnomedctEntityType_ {
